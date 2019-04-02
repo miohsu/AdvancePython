@@ -4,8 +4,8 @@ from random import choice
 Card = collections.namedtuple('Card', ['rank', 'suit'])
 
 """
-  通过实现__len__和__getitem__这两个特殊方法，
-  FrenchDeck就可以使用random.choice、reversed和sorted方法,
+  通过实现 __len__ 和 __getitem__ 这两个特殊方法，
+  FrenchDeck就可以使用 random.choice、reversed 和 sorted 方法,
   对合成的运算使得 __len__ 和 __getitem__ 的具体实现代理给 self._cards
   
   目前FrenchDeck是不能洗牌的，因为该类是不可变的，需实现 __setitem__方法
