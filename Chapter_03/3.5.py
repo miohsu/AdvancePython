@@ -19,7 +19,7 @@
 
 from collections import OrderedDict
 
-init_data = {1:'a',2:'b'}
+init_data = {1: 'a', 2: 'b'}
 
 od = OrderedDict()
 od.update(init_data)
