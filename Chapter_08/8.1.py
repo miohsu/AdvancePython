@@ -18,5 +18,39 @@
 
     5.
     函数的参数作为引用时
-    Python 的参数传递方式是共享传参，函数内部的形参是实参的别名
+    Python 的参数传递方式是共享传参，函数内部的形参是实参的别名。
+    函数可能会修改作为参数传入的可变对象，但是无法修改对象标识。
+    不要使用可变类型作为参数的默认值。
 """
+
+
+class HauntedBus(object):
+    """
+    wrong!!!!
+    """
+
+    def __init__(self, passenger=[]):
+        self.passenger = passenger
+
+    def pick(self, name):
+        self.passenger.append(name)
+
+    def drop(self, name):
+        self.passenger.remove(name)
+
+
+class TwlightBus(object):
+    """
+    Right!!!
+    """
+    def __init__(self, passenger=None):
+        if passenger is None:
+            self.passenger = []
+        else:
+            self.passenger = list(passenger)
+
+    def pick(self, name):
+        self.passenger.append(name)
+
+    def drop(self, name):
+        self.passenger.remove(name)
