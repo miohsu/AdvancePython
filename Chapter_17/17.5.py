@@ -1,16 +1,10 @@
 """
-    阻塞型 IO 和 GIL
-    CPython 解释器不是线程安全的，因此有全局解释器锁，一次只允许一个线程执行Python字节码。因此一个Python进程通常不能同时使用多个cpu核心
-    在标准库中所有执行的阻塞型IO操作的函数，在等待操作系统返回结果时都会释放GIL。
-    一个Python线程等待IO时，阻塞型IO会释放GIL，在运行另一个在线程。
+    使用 futures.as_completed
 
-    1.
-    使用concurrent.futures.ProcessPoolExecutor 启动多进程;
-    ProcessPoolExecutor 与 ThreadPoolExecutor 的区别在于：
-        ThreadPoolExecutor 的 __init__ 函数中 max_workers 参数必选
-        ProcessPoolExecutor 的 __init__ 函数中 max_workers 参数可选，默认值为 os.cpu_count() 函数返回的 CPU 的数量
+    executor.submit 方法排定一个可调用对象的执行时间，然后返回一个 Future 实例。第一个参数是可调用的对象，其余参数是传给可调用对象的参数
 
-    ProcessPoolExecutor 的价值体现在 CPU 密集型的作业上
+    futures.as_completed 接收一个序列作为参数，返回一个迭代器，在future 运行结束后产出 future
+
 """
 
 import os, time, sys, requests
@@ -51,7 +45,7 @@ def download_one(cc):
 
 
 def download_many(cc_list):
-    with futures.ProcessPoolExecutor() as executor:
+    with futures.ThreadPoolExecutor(MAX_WORKERS) as executor:
         to_do = []
         for cc in cc_list:
             future = executor.submit(download_one, cc)
