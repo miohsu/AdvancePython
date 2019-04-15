@@ -1,5 +1,5 @@
 """
-
+    通过线程实现动画显示文本式旋转指针
 """
 
 import threading
@@ -35,10 +35,10 @@ def supervisor():
     spinner = threading.Thread(target=spin, args=('thinking!', signal))
     print('spinner object:', spinner)
     spinner.start()
-    result = slow_function()
+    answer = slow_function()
     signal.go = False
     spinner.join()
-    return result
+    return answer
 
 
 if __name__ == '__main__':
