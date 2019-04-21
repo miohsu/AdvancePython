@@ -27,3 +27,4 @@
 from dis import dis
 
 dis('{1}')
+a = set([1,2,3])

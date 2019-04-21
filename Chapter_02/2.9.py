@@ -16,7 +16,7 @@ from collections import deque
 import array
 import random
 
-dq = deque()
+dq = deque(maxlen=10)
 
 
 def array_test():
@@ -25,4 +25,7 @@ def array_test():
 
 
 if __name__ == '__main__':
-    array_test()
+    # array_test()
+    for i in range(20):
+        dq.append(i)
+    print(dq)
